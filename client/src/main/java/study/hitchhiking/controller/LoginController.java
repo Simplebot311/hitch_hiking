@@ -53,6 +53,7 @@ public class LoginController {
             user.setPassword(password);
             user.setCreatetime(new Date());
             user.setName(phonenumber);
+
             userService.save(user);
             String userToken = JWTUtil.signWithUID(userService.getOne(wrapper).getUserID().toString());
             ResponseData responseData = new ResponseData();

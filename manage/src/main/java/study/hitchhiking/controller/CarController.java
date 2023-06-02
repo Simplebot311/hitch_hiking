@@ -68,14 +68,16 @@ public class CarController {
 
     @RequestMapping("/delete")
     public String deleteCar(@RequestParam(name = "carID") String carID, Model model) {
-        carService.removeById(Long.valueOf(carID));
-        //System.out.println("userID="+userID);
-
         QueryWrapper<Car> wrapper = new QueryWrapper<>();
         wrapper.eq("carID", carID);
 
         Car car = carService.getOne(wrapper);
-        model.addAttribute("one", new userVO(userService.getById(car.getUserID()), carService));
+        userVO user = new userVO(userService.getById(car.getUserID()), carService);
+
+        carService.removeById(Long.valueOf(carID));
+        //System.out.println("userID="+userID);
+
+        model.addAttribute("one", user);
 
         wrapper = new QueryWrapper<>();
         wrapper.eq("userID", car.getUserID());

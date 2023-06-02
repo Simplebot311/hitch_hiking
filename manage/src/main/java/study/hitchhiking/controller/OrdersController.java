@@ -111,52 +111,52 @@ public class OrdersController {
         return "order";
     }
 
-@RequestMapping("/update")
-public String updateOrder(@RequestParam(name = "orderID") String orderID,
-                          @RequestParam(name = "orderstatus") String orderstatus,
-                          @RequestParam(name = "orderprice") String orderprice,
-                          @RequestParam(name = "carID") String carID,
-                          @RequestParam(name = "getonposition") String getonposition,
-                          @DateTimeFormat(fallbackPatterns = {"yyyy-MM-dd'T'HH:mm"})
-                          @RequestParam(name = "getontime",required = false) Date getontime,
-                          @RequestParam(name = "getoffposition") String getoffposition,
-                          @RequestParam(name = "threshold") String threshold,
-                          @RequestParam(name = "destination") String destination,
-                          @DateTimeFormat(fallbackPatterns = {"yyyy-MM-dd'T'HH:mm"})
-                          @RequestParam(name = "departtime",required = false) Date departtime,
-                          @RequestParam(name = "UserID") String UserID,
-                          @RequestParam(name = "role")String role,
-                          Model model) {
-    Orders order = ordersService.getById(orderID);
-    if(!"不修改".equals(orderstatus)){
-        order.setOrderstatus(orderstatus);
-    }
-    try {
-        order.setOrderprice(new BigDecimal(orderprice));
-    } catch (Exception e) {
-        order.setOrderprice(new BigDecimal(0));
-    }
-    order.setCarID(carID);
-    order.setGetonposition(getonposition);
-    if(null != getontime){
-        order.setGetontime(getontime);
-    }
-    order.setGetoffposition(getoffposition);
-    order.setDestination(destination);
-    order.setThreshold(threshold);
-    if(null != departtime){
-        order.setDeparttime(departtime);
-    }
-    order.setUserID(Long.valueOf(UserID));
-    if(!"不修改".equals(role)){
-        order.setRole(role);
-    }
-    ordersService.updateById(order);
+    @RequestMapping("/update")
+    public String updateOrder(@RequestParam(name = "orderID") String orderID,
+                              @RequestParam(name = "orderstatus") String orderstatus,
+                              @RequestParam(name = "orderprice") String orderprice,
+                              @RequestParam(name = "carID") String carID,
+                              @RequestParam(name = "getonposition") String getonposition,
+                              @DateTimeFormat(fallbackPatterns = {"yyyy-MM-dd'T'HH:mm"})
+                              @RequestParam(name = "getontime",required = false) Date getontime,
+                              @RequestParam(name = "getoffposition") String getoffposition,
+                              @RequestParam(name = "threshold") String threshold,
+                              @RequestParam(name = "destination") String destination,
+                              @DateTimeFormat(fallbackPatterns = {"yyyy-MM-dd'T'HH:mm"})
+                              @RequestParam(name = "departtime",required = false) Date departtime,
+                              @RequestParam(name = "UserID") String UserID,
+                              @RequestParam(name = "role")String role,
+                              Model model) {
+        Orders order = ordersService.getById(orderID);
+        if(!"不修改".equals(orderstatus)){
+            order.setOrderstatus(orderstatus);
+        }
+        try {
+            order.setOrderprice(new BigDecimal(orderprice));
+        } catch (Exception e) {
+            order.setOrderprice(new BigDecimal(0));
+        }
+        order.setCarID(carID);
+        order.setGetonposition(getonposition);
+        if(null != getontime){
+            order.setGetontime(getontime);
+        }
+        order.setGetoffposition(getoffposition);
+        order.setDestination(destination);
+        order.setThreshold(threshold);
+        if(null != departtime){
+            order.setDeparttime(departtime);
+        }
+        order.setUserID(Long.valueOf(UserID));
+        if(!"不修改".equals(role)){
+            order.setRole(role);
+        }
+        ordersService.updateById(order);
 
-    model.addAttribute("orderList", orderVOList(ordersService.list(null)));
-    //addUserVOList("userList", userService.list(null), model);
-    return "orderSelect";
-}
+        model.addAttribute("orderList", orderVOList(ordersService.list(null)));
+        //addUserVOList("userList", userService.list(null), model);
+        return "orderSelect";
+    }
 
     private List<orderVO> orderVOList(List<Orders> list){
         if(null == list || list.size()==0)return new ArrayList<>();

@@ -62,7 +62,6 @@ public class ResponseData extends HashMap<String, Object> {
     }
 
     public static ResponseData failed() {
-
         return failed(1, "未知的系统异常，请联系运维人员");
     }
 
@@ -71,7 +70,6 @@ public class ResponseData extends HashMap<String, Object> {
         return failed(2, msg);
     }
 
-
     public static ResponseData failed(final int code, final String msg) {
         ResponseData responseData = new ResponseData();
 
@@ -79,5 +77,4 @@ public class ResponseData extends HashMap<String, Object> {
         responseData.put("msg", msg);
         return responseData;
     }
-
 }

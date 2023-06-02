@@ -41,7 +41,7 @@ public class CommentController {
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
         //判断是否有查询条件
         if (null != role && role.length == 1) {
-            wrapper.like("sex", role[0]);
+            wrapper.like("role", role[0]);
         }
         if (null != target && null != typeOfSelect) {
             wrapper.like(typeOfSelect, target);
